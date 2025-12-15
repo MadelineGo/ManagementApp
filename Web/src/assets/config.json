@@ -1,0 +1,4 @@
+{
+    "clientOrderServiceUrl": "http://localhost:8082/orders",
+    "authServiceUrl": "http://localhost:8081/api/auth"
+}

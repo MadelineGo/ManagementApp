@@ -1,0 +1,19 @@
+# System
+.DS_Store
+Thumbs.db
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Binaries
+*.dll
+*.exe
+*.pdb
+
+# IDE & Logs
+.vscode/
+.vs/
+*.log
+.env
+appsettings.Development.json

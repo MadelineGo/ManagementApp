@@ -1,0 +1,137 @@
+.order-list-container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+.filter-card {
+    margin-bottom: 20px;
+
+    .filters-row {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+
+        mat-form-field {
+            font-size: 14px;
+            width: 200px;
+        }
+    }
+}
+
+.table-container {
+    position: relative;
+    min-height: 200px;
+}
+
+.loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+    }
+}
+
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    mat-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+    }
+
+    h3 {
+        margin: 0 0 8px 0;
+        color: #333;
+        font-size: 20px;
+    }
+
+    p {
+        margin: 0 0 24px 0;
+        color: #666;
+        max-width: 400px;
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px !important;
+
+    mat-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        color: #ccc;
+        margin-bottom: 16px;
+    }
+
+    p {
+        margin: 0 0 16px 0;
+        color: #666;
+        font-size: 16px;
+    }
+}
+
+.full-width-table {
+    width: 100%;
+}
+
+// Improve spacing for the amount column so the currency symbol/value
+// are not stuck to the right border of the cell.
+.mat-column-amount {
+    text-align: right;
+    padding-right: 16px;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &.pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    &.completed {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    &.cancelled {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+}

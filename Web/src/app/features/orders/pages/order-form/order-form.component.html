@@ -1,0 +1,45 @@
+<div class="order-form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Create New Order</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Client</mat-label>
+                    <mat-select formControlName="client_id">
+                        <mat-option *ngFor="let client of clients" [value]="client.id">
+                            {{client.name}} {{client.last_name}} ({{client.email}})
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="orderForm.get('client_id')?.hasError('required')">Client is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" rows="3" placeholder="Order details..."></textarea>
+                    <mat-error *ngIf="orderForm.get('description')?.hasError('required')">Description is
+                        required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Amount</mat-label>
+                    <input matInput formControlName="amount" type="number" step="0.01" placeholder="0.00">
+                    <span matPrefix>$&nbsp;</span>
+                    <mat-error *ngIf="orderForm.get('amount')?.hasError('required')">Amount is required</mat-error>
+                    <mat-error *ngIf="orderForm.get('amount')?.hasError('min')">Amount must be positive</mat-error>
+                </mat-form-field>
+
+                <div class="actions">
+                    <button mat-button type="button" routerLink="/dashboard/orders"
+                        [disabled]="isLoading">Cancel</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="orderForm.invalid || isLoading">
+                        {{ isLoading ? 'Creating...' : 'Create Order' }}
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
