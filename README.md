@@ -65,9 +65,9 @@ php artisan serve
 ### 3. authService
 
 ```bash
-cd authService
+cd AuthService
 dotnet build
-dotnet run
+dotnet run --project AuthService.Api
 ```
 
 ## Ejecución de Pruebas

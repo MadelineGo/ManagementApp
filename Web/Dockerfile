@@ -21,8 +21,9 @@ RUN npm run build -- --configuration production
 # Stage 2: Serve the application with Nginx
 FROM nginx:alpine
 
-# Copy custom nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
@@ -34,5 +35,6 @@ COPY --from=build /app/dist/Web/browser /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Use entrypoint script
+ENTRYPOINT ["/docker-entrypoint.sh"]
+

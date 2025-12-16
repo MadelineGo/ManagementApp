@@ -22,6 +22,11 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ASPNETCORE_URLS: http://+:8080
+      DB_HOST: sql-server
+      DB_PORT: 1433
+      DB_DATABASE: AuthDb
+      DB_USERNAME: SA
+      DB_PASSWORD: "Password123!"
     ports:
       - "8081:8080"
     networks:
@@ -32,8 +37,15 @@ services:
     container_name: client-order-service
     depends_on:
       - sql-server
-    env_file:
-      - ./ClientOrderService/.env.Docker
+    environment:
+      APP_ENV: docker
+      SECRET_KEY: ZmExZGJlZDY4MmUzNzU1ODRhNDYwZDA4MmEzYTNiMDU=
+      DB_CONNECTION: sqlsrv
+      DB_HOST: sql-server
+      DB_PORT: 1433
+      DB_DATABASE: ClientOrderDb
+      DB_USERNAME: SA
+      DB_PASSWORD: "Password123!"
     ports:
       - "8082:8000"
     networks:
@@ -45,6 +57,11 @@ services:
     depends_on:
       - auth-service
       - client-order-service
+    environment:
+      AUTH_SERVICE_HOST: auth-service
+      AUTH_SERVICE_PORT: 8080
+      CLIENT_ORDER_SERVICE_HOST: client-order-service
+      CLIENT_ORDER_SERVICE_PORT: 8000
     ports:
       - "4200:80"
     networks:

@@ -17,7 +17,28 @@ public static class InfrastructureServiceExtensions
     {
         services.AddDbContext<AppDbContext>((sp, options) =>
             {
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                // Try to build connection string from environment variables first
+                var dbHost = configuration["DB_HOST"];
+                var dbPort = configuration["DB_PORT"];
+                var dbDatabase = configuration["DB_DATABASE"];
+                var dbUsername = configuration["DB_USERNAME"];
+                var dbPassword = configuration["DB_PASSWORD"];
+                
+                string connectionString;
+                
+                // If all environment variables are present, build connection string from them
+                if (!string.IsNullOrEmpty(dbHost) && !string.IsNullOrEmpty(dbPort) && 
+                    !string.IsNullOrEmpty(dbDatabase) && !string.IsNullOrEmpty(dbUsername) && 
+                    !string.IsNullOrEmpty(dbPassword))
+                {
+                    connectionString = $"Server={dbHost},{dbPort};Database={dbDatabase};User Id={dbUsername};Password={dbPassword};TrustServerCertificate=True";
+                }
+                else
+                {
+                    // Fallback to connection string from appsettings.json
+                    connectionString = configuration.GetConnectionString("DefaultConnection")!;
+                }
+                
                 options.UseSqlServer(connectionString);
             }
         );

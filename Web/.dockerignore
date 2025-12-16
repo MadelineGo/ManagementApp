@@ -31,5 +31,12 @@ coverage
 Thumbs.db
 
 # Misc
+.idea
+.vscode
+.angular
+*.log
+Dockerfile
+.dockerignore
 README.md
 .editorconfig
+LICENSE
