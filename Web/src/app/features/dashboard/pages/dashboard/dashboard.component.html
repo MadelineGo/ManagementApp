@@ -2,7 +2,7 @@
     <h1>Dashboard Overview</h1>
 
     <!-- Loading State -->
-    <div *ngIf="!stats && !hasError" class="loading-state">
+    <div *ngIf="isLoading && !hasError" class="loading-state">
         <mat-icon class="loading-icon">analytics</mat-icon>
         <p>Loading dashboard statistics...</p>
     </div>
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Chart Section -->
-    <mat-card class="chart-card" *ngIf="stats && stats.monthly_activity?.length">
+    <mat-card class="chart-card" *ngIf="stats && stats.monthly_activity?.length && !isLoading">
         <mat-card-header>
             <mat-card-title>Activity Overview</mat-card-title>
         </mat-card-header>
@@ -74,4 +74,17 @@
             </div>
         </mat-card-content>
     </mat-card>
+
+    <!-- Completed vs Pending -->
+    <mat-card class="chart-card" *ngIf="stats && !isLoading">
+        <mat-card-header>
+            <mat-card-title>Completed vs Pending</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="chart-container">
+                <canvas #statusChart></canvas>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
 </div>
